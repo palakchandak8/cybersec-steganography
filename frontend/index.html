@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberSec - Steganography</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔒 CyberSec Steganography</h1>
+            <p>Hide and reveal secret messages in images</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('encode')">Encode</button>
+            <button class="tab-btn" onclick="showTab('decode')">Decode</button>
+        </div>
+
+        <!-- Encode Tab -->
+        <div id="encode-tab" class="tab-content active">
+            <h2>Encode Message</h2>
+            <form id="encode-form">
+                <div class="form-group">
+                    <label>Select Image:</label>
+                    <input type="file" id="encode-image" accept="image/*" required>
+                    <div id="encode-preview" class="image-preview"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Secret Message:</label>
+                    <textarea id="encode-data" placeholder="Enter your secret message..." required></textarea>
+                </div>
+                
+                <button type="submit" class="btn">🔐 Encode Message</button>
+            </form>
+            
+            <div id="encode-result" class="result hidden">
+                <h3>✓ Encoded Successfully!</h3>
+                <button id="download-btn" class="btn">⬇️ Download Encoded Image</button>
+            </div>
+        </div>
+
+        <!-- Decode Tab -->
+        <div id="decode-tab" class="tab-content">
+            <h2>Decode Message</h2>
+            <form id="decode-form">
+                <div class="form-group">
+                    <label>Select Encoded Image:</label>
+                    <input type="file" id="decode-image" accept="image/*" required>
+                    <div id="decode-preview" class="image-preview"></div>
+                </div>
+                
+                <button type="submit" class="btn">🔓 Decode Message</button>
+            </form>
+            
+            <div id="decode-result" class="result hidden">
+                <h3>Decoded Message:</h3>
+                <div id="decoded-message" class="decoded-text"></div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Processing...</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Made with ❤️ for CyberSecurity</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
