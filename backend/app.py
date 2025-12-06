@@ -4,7 +4,17 @@ from steganography import encode_image, decode_image
 import os
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend communication
+
+# Update CORS for your Vercel frontend
+CORS(app, resources={
+    r"/*": {
+        "origins": [
+            "https://cybersec-steganography.vercel.app",
+            "http://localhost:3000",
+            "http://localhost:5173"
+        ]
+    }
+})
 
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
@@ -36,6 +46,7 @@ def encode():
         )
     
     except Exception as e:
+        print(f"Encoding error: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/decode', methods=['POST'])
@@ -52,7 +63,10 @@ def decode():
         return jsonify({"data": decoded_data})
     
     except Exception as e:
+        print(f"Decoding error: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    # For production deployment
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
