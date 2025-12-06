@@ -1,44 +1,89 @@
 const API_URL = 'http://localhost:5000';
 let encodedImageBlob = null;
 
-// Tab switching
-function showTab(tabName) {
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.classList.remove('active');
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
     });
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('active');
-    });
-    
-    document.getElementById(`${tabName}-tab`).classList.add('active');
-    event.target.classList.add('active');
-    
-    // Clear results
-    document.getElementById('encode-result').classList.add('hidden');
-    document.getElementById('decode-result').classList.add('hidden');
-}
+});
 
-// Image preview
-function previewImage(input, previewId) {
-    const file = input.files[0];
+// Tool tab switching
+document.querySelectorAll('.tool-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+        const tabName = this.dataset.tab;
+        
+        // Update tabs
+        document.querySelectorAll('.tool-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Update content
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.getElementById(`${tabName}-content`).classList.add('active');
+        
+        // Clear results
+        document.getElementById('encode-result').classList.add('hidden');
+        document.getElementById('decode-result').classList.add('hidden');
+    });
+});
+
+// File upload handling with drag and drop
+function setupFileUpload(inputId, areaId, previewId) {
+    const input = document.getElementById(inputId);
+    const area = document.getElementById(areaId);
     const preview = document.getElementById(previewId);
     
+    // Click to upload
+    area.addEventListener('click', () => input.click());
+    
+    // Drag and drop
+    area.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        area.style.borderColor = 'var(--primary)';
+        area.style.background = 'rgba(59, 130, 246, 0.1)';
+    });
+    
+    area.addEventListener('dragleave', () => {
+        area.style.borderColor = '';
+        area.style.background = '';
+    });
+    
+    area.addEventListener('drop', (e) => {
+        e.preventDefault();
+        area.style.borderColor = '';
+        area.style.background = '';
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            input.files = files;
+            previewImage(input, preview);
+        }
+    });
+    
+    // File selection
+    input.addEventListener('change', () => previewImage(input, preview));
+}
+
+function previewImage(input, previewElement) {
+    const file = input.files[0];
     if (file) {
         const reader = new FileReader();
         reader.onload = function(e) {
-            preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+            previewElement.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+            previewElement.classList.add('active');
+            previewElement.parentElement.querySelector('.upload-placeholder').style.display = 'none';
         };
         reader.readAsDataURL(file);
     }
 }
 
-document.getElementById('encode-image').addEventListener('change', function() {
-    previewImage(this, 'encode-preview');
-});
-
-document.getElementById('decode-image').addEventListener('change', function() {
-    previewImage(this, 'decode-preview');
-});
+// Setup file uploads
+setupFileUpload('encode-image', 'encode-upload-area', 'encode-preview');
+setupFileUpload('decode-image', 'decode-upload-area', 'decode-preview');
 
 // Encode form submission
 document.getElementById('encode-form').addEventListener('submit', async function(e) {
@@ -137,3 +182,13 @@ function showLoading(show) {
         loading.classList.add('hidden');
     }
 }
+
+// Navbar background on scroll
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+        navbar.style.background = 'rgba(15, 23, 42, 0.95)';
+    } else {
+        navbar.style.background = 'rgba(15, 23, 42, 0.8)';
+    }
+});

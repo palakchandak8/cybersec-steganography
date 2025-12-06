@@ -3,73 +3,587 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberSec - Steganography</title>
+    <title>CyberSec - Steganography Suite</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🔒 CyberSec Steganography</h1>
-            <p>Hide and reveal secret messages in images</p>
-        </header>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span>CyberSec</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Learn</a></li>
+                <li><a href="#tool">Tool</a></li>
+                <li><a href="https://github.com/palakchandak8/cybersec-steganography" target="_blank">GitHub</a></li>
+            </ul>
+            <a href="#tool" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
 
-        <div class="tabs">
-            <button class="tab-btn active" onclick="showTab('encode')">Encode</button>
-            <button class="tab-btn" onclick="showTab('decode')">Decode</button>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="badge">
+            <span class="badge-dot"></span>
+            Secure Message Hiding
+        </div>
+        
+        <div class="hero-shield">
+            <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
         </div>
 
-        <!-- Encode Tab -->
-        <div id="encode-tab" class="tab-content active">
-            <h2>Encode Message</h2>
-            <form id="encode-form">
-                <div class="form-group">
-                    <label>Select Image:</label>
-                    <input type="file" id="encode-image" accept="image/*" required>
-                    <div id="encode-preview" class="image-preview"></div>
+        <h1 class="hero-title">
+            CyberSec<br>
+            <span class="hero-subtitle">Steganography Suite</span>
+        </h1>
+
+        <p class="hero-description">
+            Hide secret messages within images using advanced LSB encoding technology. 
+            Your message becomes invisible to the naked eye, ensuring complete privacy and security.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#tool" class="btn btn-primary">Get Started</a>
+            <a href="#learn" class="btn btn-secondary">Learn More</a>
+        </div>
+
+        <div class="scroll-indicator">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Learn Section -->
+    <section id="learn" class="learn-section">
+        <div class="container">
+            <h2 class="section-title">
+                Cryptography vs <span class="highlight">Steganography</span>
+            </h2>
+            <p class="section-subtitle">Understanding the difference between hiding and encrypting your messages</p>
+
+            <div class="comparison-grid">
+                <!-- Cryptography Card -->
+                <div class="comparison-card crypto-card">
+                    <div class="card-border"></div>
+                    <div class="card-icon crypto-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h3>Cryptography</h3>
+                    <div class="feature-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                        <span><strong>Encrypts data</strong> to make it unreadable</span>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-label">Original message:</div>
+                        <div class="example-text">"Secret Meeting at 9PM"</div>
+                    </div>
+
+                    <div class="example-box scrambled">
+                        <div class="example-label">After encryption:</div>
+                        <div class="example-text">"X9#kL@mn$pQ2..."</div>
+                    </div>
+
+                    <div class="warning-box">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <span>The message is <strong>visible but scrambled</strong>. Anyone can see that secret communication is happening.</span>
+                    </div>
                 </div>
-                
-                <div class="form-group">
-                    <label>Secret Message:</label>
-                    <textarea id="encode-data" placeholder="Enter your secret message..." required></textarea>
+
+                <!-- Steganography Card -->
+                <div class="comparison-card stego-card">
+                    <div class="card-border"></div>
+                    <div class="card-icon stego-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                            <line x1="1" y1="1" x2="23" y2="23"/>
+                        </svg>
+                    </div>
+                    <h3>Steganography</h3>
+                    <div class="feature-item">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        <span><strong>Hides the existence</strong> of the message entirely</span>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-label">Original message:</div>
+                        <div class="example-text">"Secret Meeting at 9PM"</div>
+                    </div>
+
+                    <div class="example-box image-box">
+                        <div class="example-label">After steganography:</div>
+                        <div class="image-placeholder">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                            <span>Normal_image.png</span>
+                        </div>
+                    </div>
+
+                    <div class="success-box">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <span><strong>No one knows data is present.</strong> The image looks completely normal to everyone else.</span>
+                    </div>
                 </div>
-                
-                <button type="submit" class="btn">🔐 Encode Message</button>
-            </form>
-            
-            <div id="encode-result" class="result hidden">
-                <h3>✓ Encoded Successfully!</h3>
-                <button id="download-btn" class="btn">⬇️ Download Encoded Image</button>
             </div>
         </div>
+    </section>
 
-        <!-- Decode Tab -->
-        <div id="decode-tab" class="tab-content">
-            <h2>Decode Message</h2>
-            <form id="decode-form">
-                <div class="form-group">
-                    <label>Select Encoded Image:</label>
-                    <input type="file" id="decode-image" accept="image/*" required>
-                    <div id="decode-preview" class="image-preview"></div>
+    <!-- Features Section - Why Choose CyberSec -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">
+                Why Choose <span class="highlight">CyberSec</span>?
+            </h2>
+            <p class="section-subtitle">Professional-grade steganography tools designed for security enthusiasts and researchers</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h3>LSB Encoding</h3>
+                    <p>Uses Least Significant Bit technique to embed data with minimal visual impact</p>
                 </div>
-                
-                <button type="submit" class="btn">🔓 Decode Message</button>
-            </form>
-            
-            <div id="decode-result" class="result hidden">
-                <h3>Decoded Message:</h3>
-                <div id="decoded-message" class="decoded-text"></div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                            <circle cx="12" cy="12" r="3"/>
+                        </svg>
+                    </div>
+                    <h3>Invisible Changes</h3>
+                    <p>Modified pixels are imperceptible to the human eye</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3>Secure Extraction</h3>
+                    <p>Only those with access to this tool can decode your hidden messages</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                        </svg>
+                    </div>
+                    <h3>Instant Processing</h3>
+                    <p>Fast encoding and decoding powered by Python's PIL library</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="21 15 21 19 5 19 5 15"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                    </div>
+                    <h3>Lossless Output</h3>
+                    <p>PNG format ensures no data loss during image compression</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </div>
+                    <h3>Client-Side Preview</h3>
+                    <p>Preview images locally before sending to server for processing</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <div id="loading" class="loading hidden">
-            <div class="spinner"></div>
-            <p>Processing...</p>
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-section">
+        <div class="container">
+            <h2 class="section-title">
+                How It <span class="highlight">Works</span>
+            </h2>
+            <p class="section-subtitle">Understanding the LSB steganography process step by step</p>
+
+            <div class="process-grid">
+                <!-- Encoding Process -->
+                <div class="process-column">
+                    <div class="process-header">
+                        <span class="process-number">01</span>
+                        <h3>Encoding Process</h3>
+                    </div>
+
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="21 15 21 19 5 19 5 15"/>
+                                    <polyline points="17 8 12 3 7 8"/>
+                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                            </div>
+                            <div class="step-content">
+                                <h4>Upload Image</h4>
+                                <p>Select any PNG or JPG image as your carrier</p>
+                            </div>
+                        </div>
+
+                        <div class="process-step">
+                            <div class="step-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="4" y1="21" x2="4" y2="14"/>
+                                    <line x1="4" y1="10" x2="4" y2="3"/>
+                                    <line x1="12" y1="21" x2="12" y2="12"/>
+                                    <line x1="12" y1="8" x2="12" y2="3"/>
+                                    <line x1="20" y1="21" x2="20" y2="16"/>
+                                    <line x1="20" y1="12" x2="20" y2="3"/>
+                                </svg>
+                            </div>
+                            <div class="step-content">
+                                <h4>Enter Message</h4>
+                                <p>Type your secret message to hide</p>
+                            </div>
+                        </div>
+
+                        <div class="process-step">
+                            <div class="step-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <div class="step-content">
+                                <h4>LSB Encoding</h4>
+                                <p>Message bits replace least significant pixel bits</p>
+                            </div>
+                        </div>
+
+                        <div class="process-step">
+                            <div class="step-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="21 15 21 19 5 19 5 15"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                            </div>
+                            <div class="step-content">
+                                <h4>Download Result</h4>
+                                <p>Get your image with hidden message</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decoding Process -->
+                <div class="process-column">
+                    <div class="process-header">
+                        <span class="process-number">02</span>
+                        <h3>Decoding Process</h3>
+                    </div>
+
+                    <div class="process-steps">
+                        <div class="process-step">
+                            <div class="step-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="21 15 21 19 5 19 5 15"/>
+                                    <polyline points="17 8 12 3 7 8"/>
+                                    <line x1="12" y1="3" x2="12" y2="15"/>
+                                </svg>
+                            </div>
+                            <div class="step-content">
+                                <h4>Upload Encoded Image</h4>
+                                <p>Select the image containing hidden data</p>
+                            </div>
+                        </div>
+
+                        <div class="process-step">
+                            <div class="step-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="11" cy="11" r="8"/>
+                                    <path d="m21 21-4.35-4.35"/>
+                                </svg>
+                            </div>
+                            <div class="step-content">
+                                <h4>Extract Bits</h4>
+                                <p>Read LSB from each pixel</p>
+                            </div>
+                        </div>
+
+                        <div class="process-step">
+                            <div class="step-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="4" y1="21" x2="4" y2="14"/>
+                                    <line x1="4" y1="10" x2="4" y2="3"/>
+                                    <line x1="12" y1="21" x2="12" y2="12"/>
+                                    <line x1="12" y1="8" x2="12" y2="3"/>
+                                </svg>
+                            </div>
+                            <div class="step-content">
+                                <h4>Reconstruct Message</h4>
+                                <p>Convert bits back to text</p>
+                            </div>
+                        </div>
+
+                        <div class="process-step">
+                            <div class="step-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"/>
+                                </svg>
+                            </div>
+                            <div class="step-content">
+                                <h4>View Message</h4>
+                                <p>See the revealed secret message</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Note -->
+            <div class="technical-note">
+                <div class="note-icon">💡</div>
+                <div class="note-content">
+                    <strong>Technical Note</strong>
+                    <p>LSB (Least Significant Bit) steganography works by modifying the last bit of each color channel (RGB) in pixels. Since the LSB has minimal impact on the overall color value, the changes are invisible to human perception. A single pixel can store 3 bits of data (one per color channel), allowing significant amounts of text to be hidden in larger images.</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <footer>
-        <p>Made with ❤️ for CyberSecurity</p>
+    <!-- Tool Section -->
+    <section id="tool" class="tool-section">
+        <div class="container-small">
+            <h2 class="section-title">
+                Start <span class="highlight">Encoding</span>
+            </h2>
+            <p class="section-subtitle">Use our tool to hide or reveal secret messages in images</p>
+
+            <div class="tool-container">
+                <div class="tool-tabs">
+                    <button class="tool-tab active" data-tab="encode">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        ENCODE
+                    </button>
+                    <button class="tool-tab" data-tab="decode">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+                        </svg>
+                        DECODE
+                    </button>
+                </div>
+
+                <!-- Encode Tab Content -->
+                <div id="encode-content" class="tab-content active">
+                    <div class="tool-header">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                        <h3>Encode Message</h3>
+                    </div>
+
+                    <form id="encode-form">
+                        <div class="form-group">
+                            <label>Select Image</label>
+                            <div class="file-upload-area" id="encode-upload-area">
+                                <input type="file" id="encode-image" accept="image/*" required hidden>
+                                <div class="upload-placeholder">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                                        <polyline points="21 15 16 10 5 21"/>
+                                    </svg>
+                                    <p>Drag & drop or click to upload</p>
+                                    <span>PNG, JPG, WEBP supported</span>
+                                </div>
+                                <div id="encode-preview" class="image-preview"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Secret Message</label>
+                            <textarea id="encode-data" placeholder="Enter your secret message here..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            ENCODE MESSAGE
+                        </button>
+                    </form>
+
+                    <div id="encode-result" class="result hidden">
+                        <div class="result-success">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <h3>Encoded Successfully!</h3>
+                            <p>Your message has been hidden in the image</p>
+                        </div>
+                        <button id="download-btn" class="btn btn-primary">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="21 15 21 19 5 19 5 15"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                            Download Encoded Image
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Decode Tab Content -->
+                <div id="decode-content" class="tab-content">
+                    <div class="tool-header">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+                        </svg>
+                        <h3>Decode Message</h3>
+                    </div>
+
+                    <form id="decode-form">
+                        <div class="form-group">
+                            <label>Select Encoded Image</label>
+                            <div class="file-upload-area" id="decode-upload-area">
+                                <input type="file" id="decode-image" accept="image/*" required hidden>
+                                <div class="upload-placeholder">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                                        <polyline points="21 15 16 10 5 21"/>
+                                    </svg>
+                                    <p>Drag & drop or click to upload</p>
+                                    <span>PNG, JPG, WEBP supported</span>
+                                </div>
+                                <div id="decode-preview" class="image-preview"></div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+                            </svg>
+                            DECODE MESSAGE
+                        </button>
+                    </form>
+
+                    <div id="decode-result" class="result hidden">
+                        <div class="result-success">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"/>
+                            </svg>
+                            <h3>Decoded Message</h3>
+                        </div>
+                        <div id="decoded-message" class="decoded-text"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Warning -->
+            <div class="security-warning">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <span><strong>Security Note:</strong> This is an educational tool. LSB steganography can be detected by steganalysis tools. For production use, consider more sophisticated techniques.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        <span>CyberSec</span>
+                    </div>
+                    <p>A professional steganography tool built for cybersecurity education and research.</p>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <ul>
+                            <li><a href="https://en.wikipedia.org/wiki/Steganography" target="_blank">What is Steganography?</a></li>
+                            <li><a href="https://en.wikipedia.org/wiki/Bit_numbering#Least_significant_bit" target="_blank">LSB Technique</a></li>
+                            <li><a href="https://pillow.readthedocs.io/" target="_blank">Python Pillow Docs</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Tech Stack</h4>
+                        <div class="tech-tags">
+                            <span>Python 3.x</span>
+                            <span>Flask</span>
+                            <span>Pillow (PIL)</span>
+                            <span>HTML5</span>
+                            <span>CSS3</span>
+                            <span>JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Made with ❤️ for CyberSecurity Education</p>
+                <a href="https://github.com/palakchandak8/cybersec-steganography" target="_blank" class="github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.840 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    View on GitHub
+                </a>
+            </div>
+        </div>
     </footer>
+
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
 
     <script src="script.js"></script>
 </body>
