@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-# CORS - Allow frontend
+# CORS configuration
 CORS(app, resources={
     r"/*": {
         "origins": [
@@ -18,13 +18,16 @@ CORS(app, resources={
     }
 })
 
-@app.route('/')
-@app.route('/api')
+@app.route('/', methods=['GET'])
+@app.route('/api', methods=['GET'])
 def home():
     return jsonify({"message": "Steganography API is running"})
 
-@app.route('/api/encode', methods=['POST'])
+@app.route('/api/encode', methods=['POST', 'OPTIONS'])
 def encode():
+    if request.method == 'OPTIONS':
+        return '', 204
+    
     try:
         if 'image' not in request.files:
             return jsonify({"error": "No image file provided"}), 400
@@ -47,8 +50,11 @@ def encode():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route('/api/decode', methods=['POST'])
+@app.route('/api/decode', methods=['POST', 'OPTIONS'])
 def decode():
+    if request.method == 'OPTIONS':
+        return '', 204
+    
     try:
         if 'image' not in request.files:
             return jsonify({"error": "No image file provided"}), 400
@@ -60,5 +66,3 @@ def decode():
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-
-app = app
