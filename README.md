@@ -1,160 +1,144 @@
-# 🔒 CyberSec Steganography
+## 🔒 CyberSec Steganography
 
-A web-based steganography tool that allows you to hide secret messages within images using LSB (Least Significant Bit) technique.
+Hide secret messages inside images using LSB steganography. Simple, secure, serverless.
 
-## Features
+**🌐 Live Demo:** [https://cybersec-steganography.vercel.app/](https://cybersec-steganography.vercel.app/)
 
-- 🖼️ Encode secret messages into images
-- 🔓 Decode hidden messages from images
-- 🎨 Clean and intuitive user interface
-- 🔐 Secure LSB steganography algorithm
-- 📱 Responsive design
+---
 
-## Technology Stack
+## What It Does ✨
 
-**Backend:**
-- Python 3.x
-- Flask
-- Pillow (PIL)
+* 🖼️ Hide secret text inside images
+* 🔓 Extract hidden messages from images
+* 🎨 Clean, intuitive, and lightweight UI
+* 🔐 Secure LSB steganography algorithm
+* 📱 Fully responsive design
 
-**Frontend:**
-- HTML5
-- CSS3
-- Vanilla JavaScript
+---
 
-## Installation
+## Technology Stack 🔧 
 
-### Prerequisites
-- Python 3.8 or higher
-- pip package manager
+### **Backend**
 
-### Backend Setup
+* Python 3.x
+* Flask
+* Pillow (PIL)
 
-1. Clone the repository:
+### **Frontend**
+
+* HTML5
+* CSS3
+* Vanilla JavaScript
+
+### **Deployment**
+
+* Vercel (Serverless Functions)
+
+---
+
+## Architecture 🏗️ 
+
+The project follows a decoupled structure:
+
+* **Backend API:** Deployed on Vercel serverless functions
+* **Frontend:** Static site hosted on Vercel
+* Communication happens through REST API endpoints
+
+---
+
+## Installation 📥 
+
+### **Prerequisites**
+
+* Python 3.8+
+* pip
+* Node.js (for Vercel CLI)
+
+---
+
+
+## Quick Start 🚀 
+
+### Backend
+```bash
+git clone https://github.com/palakchandak8/cybersec-steganography-backend.git
+cd cybersec-steganography-backend
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+python app.py  # Runs on localhost:5000
+```
+
+### Frontend
 ```bash
 git clone https://github.com/palakchandak8/cybersec-steganography.git
 cd cybersec-steganography
+python -m http.server 8000  # Visit localhost:8000
 ```
 
-2. Navigate to backend directory:
-```bash
-cd backend
-```
+---
 
-3. Create virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+## How to Use 🎯 
 
-4. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
+**Encode:** Upload image → Type secret → Download encoded image  
+**Decode:** Upload encoded image → View hidden message
 
-5. Run the Flask server:
-```bash
-python app.py
-```
+---
 
-The API will be available at `http://localhost:5000`
+## How It Works 🔬 
 
-### Frontend Setup
+Uses **Least Significant Bit (LSB)** technique: replaces the last bit of pixel RGB values with message data. Invisible to the eye, reversible by the decoder.
 
-1. Open `frontend/script.js` and ensure API_URL points to your backend
-2. Open `frontend/index.html` in a web browser or use a local server:
-```bash
-cd frontend
-python -m http.server 8000
-```
+---
 
-Visit `http://localhost:8000` in your browser
+## API 📡 
 
-## Usage
+**POST `/encode`** — Returns image with hidden message  
+**POST `/decode`** — Returns `{"data": "secret text"}`
 
-### Encoding a Message
+---
 
-1. Click on the "Encode" tab
-2. Select an image file (PNG, JPG, etc.)
-3. Enter your secret message
-4. Click "Encode Message"
-5. Download the encoded image
+## Project Structure 📁 
 
-### Decoding a Message
-
-1. Click on the "Decode" tab
-2. Select an encoded image
-3. Click "Decode Message"
-4. View the hidden message
-
-## API Endpoints
-
-### POST /encode
-Encodes a message into an image.
-
-**Request:**
-- `image`: Image file (multipart/form-data)
-- `data`: Secret message (string)
-
-**Response:**
-- Encoded image file (PNG)
-
-### POST /decode
-Decodes a hidden message from an image.
-
-**Request:**
-- `image`: Encoded image file (multipart/form-data)
-
-**Response:**
-```json
-{
-  "data": "decoded message"
-}
-```
-
-## How It Works
-
-This application uses the LSB (Least Significant Bit) steganography technique:
-
-1. **Encoding:** Converts text to binary and modifies the least significant bit of pixel RGB values
-2. **Decoding:** Reads the LSB of pixels to reconstruct the hidden message
-3. A termination flag indicates the end of the hidden message
-
-## Project Structure
 ```
 cybersec-steganography/
 ├── backend/
-│   ├── app.py              # Flask API
-│   ├── steganography.py    # Core steganography logic
-│   ├── requirements.txt    # Python dependencies
-│   └── uploads/            # Temporary upload folder
+│   ├── app.py
+│   ├── steganography.py
+│   ├── requirements.txt
+│   └── vercel.json
 ├── frontend/
-│   ├── index.html          # Main HTML page
-│   ├── style.css           # Styling
-│   └── script.js           # Frontend logic
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
 ├── README.md
-├── .gitignore
-
+└── .gitignore
 ```
 
-## Security Note
+---
 
-⚠️ This is an educational project. LSB steganography can be detected by steganalysis tools. For production use, consider more sophisticated steganographic techniques.
+## Live Deployments 🌐 
 
-## Contributing
+* **Frontend:** [https://cybersec-steganography.vercel.app/](https://cybersec-steganography.vercel.app/)
+* **Backend:** Vercel Serverless API
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+---
 
-## License
+## ⚠️ Security Note
 
-MIT License - see LICENSE file for details
+LSB steganography is educational only—advanced tools can detect hidden patterns. For production‑grade secrecy, stronger algorithms are recommended.
 
-## Author
+---
 
-Your Name - [palakchandak8](https://github.com/palakchandak8)
+## Contributing 🤝 
 
-## Acknowledgments
+Pull requests are welcome! Found a bug? Open an issue.
 
-- Built for CyberSecurity education
-- Uses PIL (Pillow) for image manipulation
-- Flask for REST API
+---
+
+## Author 👩‍💻 
+
+**Palak Chandak** — [https://github.com/palakchandak8](https://github.com/palakchandak8)
+
+---
+
+*Built for cybersecurity education · Powered by Flask & Vercel*
