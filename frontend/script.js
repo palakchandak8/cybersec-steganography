@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000';
+const API_URL = 'https://cybersec-steganography-backend.vercel.app/api';
 let encodedImageBlob = null;
 
 // Smooth scrolling for navigation links
